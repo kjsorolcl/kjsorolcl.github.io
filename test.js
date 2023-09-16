@@ -1,5 +1,5 @@
 <script src="https://flashgamehouse.github.io/ruffle.js"></script>
-function (e){
+function load(e){
     console.log('load!');
     var swfobject = {};
     
