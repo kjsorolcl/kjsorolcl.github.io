@@ -1,0 +1,23 @@
+<div id='ruffle'></div>
+        <script src='https://unpkg.com/@ruffle-rs/ruffle'></script>
+        <script>
+var swfobject = {};
+var player2;
+var ruffle2;
+
+swfobject.embedSWF = function(url, cont, width, height){
+    var ruffle = window.RufflePlayer.newest(),
+        player = Object.assign(document.getElementById(cont).appendChild(ruffle.createPlayer()), {
+            width: width,
+            height: height,
+            style: 'width: ' + width + 'px; height: ' + height + 'px',
+        });
+    window.RufflePlayer.config = {autoplay: "false"};
+    player.baseURI = "https://kjsorolcl.github.io";
+    player.load({ url: url }).then(value=>{console.log('then');});
+    player2 = player;
+    ruffle2 = ruffle;
+}
+
+swfobject.embedSWF('https://kjsorolcl.github.io/%E1%84%8C%E1%85%B2%E1%84%83%E1%85%B5%E1%84%8B%E1%85%B4%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%84%89%E1%85%B3%E1%84%86%E1%85%A1%E1%84%89%E1%85%B3%E1%84%91%E1%85%A1%E1%84%90%E1%85%B5.swf', 'ruffle', 794, 600);
+        </script>
