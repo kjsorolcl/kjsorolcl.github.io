@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<!--  GENERAL  -->
+	<!--  =======  -->
+	<term key="shared_object_name">game-id</term>
+	<term key="reset-shared-object">f</term>
+	<term key="language">en</term>
+	<term key="online">false</term>
+	<term key="load_level_assets">true</term>
+	<term key="show_hud">true</term>
+	<term key="skip_menu_intro">true</term>
+	<term key="nivel_inicial">1</term>
+	<term key="segundo_nivel">2</term>
+	<term key="player_speed">12</term>
+	<term key="player_idle_benefit">1.2</term>
+	<term key="total_lives">3</term><!--  3  -->
+	<term key="player_bullet_speed">45</term><!--  45  -->
+	<term key="player_bullet_strength">100</term><!--  100  -->
+	<term key="player_bullet_trajectory">350</term><!--  350  -->
+		<!--  TIEMPO INVULNERABILIDAD JUGADOR  -->
+	<!--  ===============================  -->
+	<term key="invulnerability_time_ms">4000</term>	<!--  4000  -->
+	<!--  DEBUG  -->
+	<!--  =====  -->
+	<term key="debug">false</term>
+	<term key="debug_attack_area">false</term>
+	
+	<!--  SWFs  -->
+	<!--  ====  -->
+	<term key="swfs_to_load_on_start">ships,sounds,fx,player,Player2,Player3,hud,widgets/characterselect,widgets/mainmenu,widgets/transitions,widgets/ingame,widgets/levels,widgets/levelcomplete,widgets/levelcompletetransition,widgets/gameover,widgets/instructions,widgets/credits,widgets/wingame,widgets/setup</term>
+	<!--  TO LOAD PER LEVEL  -->
+	<term key="swfs_to_load_on_first_play"></term>
+	<!--  SIZES  -->
+	<term key="size_bytes_fx">20000</term>
+	<term key="size_bytes_level1">12558</term>
+	<term key="size_bytes_player">150194</term>
+	<term key="size_bytes_scenery">1750235</term>
+	<term key="size_bytes_sounds">344839</term>
+	<term key="size_bytes_widgets">2241599</term>
+	<term key="size_bytes_widgets/new_widgets">2241599</term>
+	
+	<!--  SFXs Y MUSICAS GLOBALES  -->
+	<!--  =======================  -->
+	<term key="global_sfx_ids">Hit,girlAttackA,girlAttackB,girlAttackC,shipHit1,shipHit2,shipHit3,missile1,missile2,missile3,beam1,beam2,beam3,laser1,laser2,laser3,partDestroyed,shipRush,girlHit1,girlHit2,girlHit3</term>
+	<term key="global_music_ids">musicIngameB,musicIngameC,winGame,gameOver,levels,splash,button,loading,rollover,splashInto,transition</term>
+	
+	<!--  VOLUMENES  -->
+	<!--  =========  -->
+	<term key="master_volume">1</term>
+	<term key="Volume_splash">1</term>
+	<term key="Volume_musicIngameC">0.47</term>
+	<term key="Volume_musicIngameB">0.47</term>
+	<term key="Volume_girlAttackA">0.35</term>
+	<term key="Volume_girlAttackB">0.35</term>
+	<term key="Volume_girlAttackC">0.35</term>
+	<term key="Volume_girlHit1">0.4</term>
+	<term key="Volume_girlHit2">0.4</term>
+	<term key="Volume_girlHit3">0.4</term>
+	<term key="Volume_shipHit1">0.3</term>
+	<term key="Volume_shipHit2">0.3</term>
+	<term key="Volume_shipHit3">0.3</term>
+	<term key="Volume_beam1">0.2</term>
+	<term key="Volume_beam2">0.2</term>
+	<term key="Volume_beam3">0.2</term>
+	<term key="Volume_laser3">0.5</term>
+	<term key="Volume_laser1">0.6</term>
+	<term key="Volume_laser2">0.6</term>
+	<term key="Volume_missile1">0.6</term>
+	<term key="Volume_missile2">0.6</term>
+	<term key="Volume_missile3">0.6</term>
+	<term key="Volume_partDestroyed">0.6</term>
+	<term key="Volume_shipRush">0.4</term>
+	<term key="Volume_button">2</term>
+	<term key="Volume_loading">1</term>
+	<term key="Volume_rollover">0.7</term>
+	<term key="Volume_splashInto">1</term>
+	<term key="Volume_transition">1</term>
+	<term key="Volume_winGame">1</term>
+	<term key="Volume_gameOver">1</term>
+	<term key="Volume_levels">0.5</term>
+	
+	<!-- la carga de la estrategias se hace en config.as
+		loadStrategies
+		
+		y se configuran en getShipStrategy
+	
+	<!-- BulletType
+	tipo de bala, intervalo entre disparos, tamaño de la tanda de disparos, tamaño de la tanda pasiva, dispara todos juntos?, angulo inicial de abanico, angulo final de abanico, cantidad de instancias por disparo, 
+		tiempo a esperar antes de activar el disparo, tiempo que está activo el disparo, velocidad del disparo, velocidad de rotación (si aplica)
+		
+		los nombres de bala son:
+		"MissileAsset";
+		"BigLaser";
+		"SmallBlast"xx;
+		"MediumBlast"xx;
+		"BigBlast"xx;
+		"ShinyBlast"xx;		
+		"SmallPellet"xx;
+		"MediumPellet"xx;
+		"ShinyPellet"xx;
+		"SmallOval"xx;
+		"VerticalOval"xx;
+		"LightLaser";
+
+	-->
+	<term key="cant_ataques">50</term><!-- si creas mas ponele atkX donde X es la posicion de la ultima instancia y actualiza el valor de cant_ataques -->
+	<term key="atk_1">SmallPellet, 400, 15, 9,false, 0, 0, 1, 0, 3000, 8, 0</term>
+	<term key="atk_2">SmallPellet, 400, 15, 9,false, 0, 0, 3, 0, 3000, 8, 0</term>
+	<term key="atk_3">SmallPellet, 300, 1, 9,false, 0, 0, 3, 0, 3000, 6, 0</term>
+	<term key="atk_4">SmallPellet, 500, 3, 9,true, 0, -180, 6, 0, 3000, 10, 0</term>
+	<term key="atk_5">SmallPellet, 400, 5, 9,false, 0, -90, 5, 0, 3000, 5, 0</term>
+	<term key="atk_6">SmallPellet, 500, 3, 9,true, 0, 180, 5, 0, 4000, 6, 0</term>
+
+	<term key="atk_7">MediumPellet, 300, 1, 9,false, 0, 0, 1, 0, 4000, 5, 0</term>
+	<term key="atk_8">MediumPellet, 200, 3, 9,false, 0, 0, 3, 0, 3000, 5, 0</term>
+	<term key="atk_9">MediumPellet, 200, 2, 9,false, 0, -45, 3, 0, 3000, 5, 0</term>
+	<term key="atk_10">MediumPellet, 300, 2, 9,true, 0, -180, 3, 0, 3000, 5, 0</term>
+	<term key="atk_11">MediumPellet, 400, 5, 9,false, 0, -90, 3, 0, 3000, 7, 0</term>
+	<term key="atk_12">MediumPellet, 300, 5, 9,false, 0, -45, 3, 0, 4000, 7, 0</term>
+
+	<term key="atk_13">ShinyPellet, 400, 15, 9,false, 0, 0, 1, 0, 3000, 8, 0</term>
+	<term key="atk_14">ShinyPellet, 400, 15, 9,false, 0, 0, 3, 0, 3000, 8, 0</term>
+	<term key="atk_15">ShinyPellet, 600, 20, 9,false, 0, -45, 5, 0, 3000, 5, 0</term>
+	<term key="atk_16">ShinyPellet, 800, 20, 9,true, 0, -180, 8, 0, 3000, 10, 0</term>
+	<term key="atk_17">ShinyPellet, 1200, 20, 9,false, 0, -90, 10, 0, 3000, 5, 0</term>
+	<term key="atk_18">ShinyPellet, 2000, 20, 9,true, 0, 360, 10, 0, 4000, 2, 0</term>
+
+	<term key="atk_19">SmallOval, 100, 1, 4,true, 0, 0, 1, 0, 4000, 6, 50</term>
+	<term key="atk_20">SmallOval, 400, 15, 9,false, 0, 0, 3, 0, 3000, 8, 0</term>
+	<term key="atk_21">SmallOval, 600, 20, 9,false, 0, -45, 5, 0, 3000, 5, 0</term>
+
+	<term key="atk_22">VerticalOval, 400, 15, 9,false, 0, 0, 1, 0, 3000, 8, 0</term>
+	<term key="atk_23">VerticalOval, 400, 15, 9,false, 0, 0, 3, 0, 3000, 8, 0</term>
+	<term key="atk_24">VerticalOval, 600, 20, 9,false, 0, -45, 5, 0, 3000, 5, 0</term>
+
+	<term key="atk_25">SmallBlast, 200, 1, 4,true, 0, 0, 1, 0, 4000, 8, 40</term>
+	<term key="atk_26">SmallBlast, 400, 15, 9,false, 0, 0, 3, 0, 3000, 8, 40</term>
+	<term key="atk_27">SmallBlast, 600, 20, 9,false, 0, -45, 5, 0, 3000, 5, 40</term>
+	
+	<term key="atk_28">MediumBlast, 100, 1, 4,true, 0, 0, 1, 0, 4000, 6, 40</term>
+	<term key="atk_29">MediumBlast, 400, 15, 9,false, 0, 0, 3, 0, 3000, 8, 40</term>
+	<term key="atk_30">MediumBlast, 600, 20, 9,false, 0, -45, 5, 0, 3000, 5, 40</term>
+
+	<term key="atk_31">BigBlast, 300, 1, 4,true, 0, 0, 1, 0, 4000, 9, 0</term>
+	<term key="atk_32">BigBlast, 400, 15, 9,false, 0, 0, 3, 0, 3000, 8, 0</term>
+	<term key="atk_33">BigBlast, 600, 20, 9,false, 0, -45, 5, 0, 3000, 5, 0</term>
+
+	<term key="atk_34">ShinyBlast, 400, 15, 9,false, 0, 0, 1, 0, 3000, 8, 0</term>
+	<term key="atk_35">ShinyBlast, 400, 15, 9,false, 0, 0, 3, 0, 3000, 8, 0</term>
+	<term key="atk_36">ShinyBlast, 600, 20, 9,false, 0, -45, 5, 0, 3000, 5, 0</term>
+
+	<term key="atk_37">LightLaser, 1500, 1, 1,true, 0, 0, 1, 900, 1400, 1, 0</term>
+	<term key="atk_38">LightLaser, 100, 15, 9,true, 0, 0, 3, 300, 3000, 1, 0</term>
+	<term key="atk_39">LightLaser, 100, 50, 9,true, 0, 0, 5, 300, 3000, 1, 0</term>
+
+	<term key="atk_40">BigLaser, 1500, 1, 1,true, 0, 0, 1, 900, 1400, 1, 0</term>
+	<term key="atk_41">BigLaser, 800, 15, 9,false, 0, 0, 3, 0, 3000, 8, 0</term>
+	<term key="atk_42">BigLaser, 1000, 20, 9,false, 0, 0, 5, 0, 3000, 5, 0</term>
+	
+	<term key="atk_43">MissileAsset, 700, 1, 1,false, 0, 0, 1, 200, 3000, 8, 0</term>
+	<term key="atk_44">MissileAsset, 500, 1, 2,false, 0, 0, 2, 200, 3000, 9, 0</term>
+	<term key="atk_45">MissileAsset, 800, 5, 9,true, 0, 0, 4, 200, 3000, 10, 0</term>
+	<term key="atk_46">MissileAsset, 800, 5, 9,true, 0, 0, 10, 200, 3000, 5, 0</term>
+
+	<term key="atk_47">SmallPellet, 100, 1, 4,true, 0, 0, 1, 0, 4000, 6, 0</term>
+	<term key="atk_48">MediumPellet, 200, 2, 9,false, 0, 0, 1, 0, 3000, 6, 0</term>
+
+	<term key="atk_49">SmallPellet, 200, 1, 9,false, 0, 0, 1, 0, 4000, 7, 0</term>
+	<term key="atk_50">MediumPellet, 300, 1, 9,false, 0, 0, 1, 0, 4500, 4, 0</term>
+
+	<term key="cant_movimientos">16</term><!-- si creas mas ponele movX donde X es la posicion de la ultima instancia y actualiza el valor de cant_movimientos -->
+	<term key="mov_1">SinusoidalMovement, .01, 1</term>		<!--movimiento sinusoidadl que sube y baja: nombre, velocidad, ciclos -->
+	<term key="mov_2">SinusoidalMovement, .03, 2</term>	
+	<term key="mov_3">SinusoidalMovement, .04, 3</term>	
+	<term key="mov_4">GoAndHoldMovement,4, 380, 400, 700</term>	<!--movimiento que va a una posicion y espera ahí: velocidad, posX, posY, tiempo que espera en el lugar -->
+	<term key="mov_5">GoAndHoldMovement,6, 800, 400, 2000</term> <!-- este es el que vuelve a 0 -->
+	<term key="mov_6">GoAndHoldMovement,6, 380, 380, 1000</term>
+	<term key="mov_7">GoAndHoldMovement,10, 380, 380, 1000</term>
+	<term key="mov_8">GoAndHoldMovement,7, 500, 580, 1000</term>
+	<term key="mov_9">GoAndHoldMovement,8, 800, 580, 700</term> <!-- vuelve para taras abajo -->
+	<term key="mov_10">GoAndHoldMovement,6, 500, 180, 800</term>
+	<term key="mov_11">GoAndHoldMovement,7, 800, 180, 600</term> <!-- vuelve para taras abajo -->
+	<term key="mov_12">TurningMovement,.05, 1, 45</term>			<!--movimiento que gira sobrel eje (no combinar con lasers): nombre, velocidad de giro, ciclos, angulo de giros -->
+	<term key="mov_13">GoAndHoldMovement,7, 500, 480, 1000</term>
+	<term key="mov_14">GoAndHoldMovement,6, 800, 400, 2500</term>
+	<term key="mov_15">GoAndHoldMovement,6, 500, 180, 800</term>
+	<term key="mov_16">GoAndHoldMovement,7, 500, 480, 1000</term>
+	
+	<!--TurretType.as
+	tipo de disparo por arma en el arte
+			_bulletsByType["p"]		= new Array(BulletType.LIGHT_PELLET,BulletType.LIGHT_LASER);
+			_bulletsByType["mp"]	= new Array(BulletType.MEDIUM_PELLET);//PELLET;		// lv 2 side turret array
+			_bulletsByType["c"]		= new Array(BulletType.MISSILE, BulletType.SMALL_OVAL, BulletType.VERTICAL_OVAL);//CANNON;
+			_bulletsByType["l"]		= new Array(BulletType.LIGHT_LASER, BulletType.LIGHT_BLAST);//LASER;
+			_bulletsByType["pg"]	= new Array(BulletType.LIGHT_PELLET, BulletType.MEDIUM_PELLET, BulletType.SHINY_PELLET);//PELLET;
+			_bulletsByType["lc"]	= new Array(BulletType.STRONG_LASER, BulletType.STRONG_BLAST);//CANNON;
+			_bulletsByType["bc"]	= new Array(BulletType.STRONG_LASER, BulletType.MISSILE, BulletType.MEDIUM_BLAST);//CANNON;
+			_bulletsByType["mg"]	= new Array(BulletType.LIGHT_PELLET, BulletType.MEDIUM_PELLET, BulletType.SHINY_PELLET,BulletType.MISSILE);//PELLET;
+			_bulletsByType["sc"]	= new Array(BulletType.BIG_LASER, BulletType.MEDIUM_BLAST, BulletType.STRONG_BLAST);//CANNON;
+		-->
+	
+	
+	<!-- estrategia por nave -->
+	<!--
+	se escriben como tiras donde pones primero el movimiento, después cuantos ataques puede realizar y y cuantos puede poner a la vez
+		por ej: mov1,3,2,atk1,atk2,atk3 dice que al movimiento 1 se pueden aplicar 3 ataques de los cuales efectivamente se aplican 2 a la vez
+		y estos pueden ser atk1,atk2,atk3
+	-->
+	<term key="strat_1">mov_5,1,1,atk_47,
+		mov_9,1,1,atk_47,
+		mov_5,1,1,atk_3,
+		mov_11,1,1,atk_47,
+		mov_5,1,1,atk_3,
+		mov_12,1,1,atk_3,
+		mov_5,1,1,atk_47,
+		mov_9,1,1,atk_47,
+		mov_5,1,1,atk_3,
+		mov_11,1,1,atk_47,
+		mov_5,1,1,atk_3,
+		mov_12,1,1,atk_6,
+		mov_5,1,1,atk_47,
+		mov_9,1,1,atk_47,
+		mov_5,1,1,atk_3,
+		mov_11,1,1,atk_47,
+		mov_5,1,1,atk_3,
+		mov_12,1,1,atk_6,
+		mov_5,1,1,atk_47,
+		mov_9,1,1,atk_47,
+		mov_5,1,1,atk_3,
+		mov_11,1,1,atk_47,
+		mov_5,1,1,atk_3,
+		mov_12,1,1,atk_3,
+		mov_8,1,1,atk_3,
+		mov_10,1,1,atk_6,
+		mov_5,1,1,atk_4,
+		mov_8,1,1,atk_6,
+		mov_10,1,1,atk_6,
+		mov_5,1,1,atk_3,
+		mov_8,1,1,atk_6,
+		mov_10,1,1,atk_6,
+		mov_5,1,1,atk_3,
+		mov_8,1,1,atk_6,
+		mov_10,1,1,atk_6,
+		mov_5,1,1,atk_6,
+		mov_5,1,1,atk_47,
+		mov_9,1,1,atk_47,
+		mov_5,1,1,atk_4,
+		mov_11,1,1,atk_47,
+		mov_5,1,1,atk_3,
+		mov_12,1,1,atk_6,
+		mov_5,1,1,atk_47,
+		mov_9,1,1,atk_47,
+		mov_5,1,1,atk_3,
+		mov_11,1,1,atk_47,
+		mov_5,1,1,atk_3,
+		mov_12,1,1,atk_6,
+		mov_5,1,1,atk_47,
+		mov_9,1,1,atk_47,
+		mov_5,1,1,atk_3,
+		mov_11,1,1,atk_47,
+		mov_5,1,1,atk_3,
+		mov_12,1,1,atk_6,
+		mov_5,1,1,atk_4,
+		mov_9,1,1,atk_47,
+		mov_5,1,1,atk_3,
+		mov_11,1,1,atk_47,
+		mov_5,1,1,atk_3,
+		mov_12,1,1,atk_6,
+		mov_8,1,1,atk_4,
+		mov_10,1,1,atk_6,
+		mov_5,1,1,atk_6,
+		mov_8,1,1,atk_6,
+		mov_10,1,1,atk_6,
+		mov_5,1,1,atk_6,
+		mov_8,1,1,atk_6,
+		mov_10,1,1,atk_6,
+		mov_5,1,1,atk_6,
+		mov_8,1,1,atk_6,
+		mov_10,1,1,atk_6,
+		mov_5,1,1,atk_6,
+		mov_12,1,1,atk_6</term>
+	
+	<term key="strat_2">mov_5,1,1,atk_47,
+		mov_9,2,1,atk_8,atk_47,
+		mov_5,1,1,atk_7,
+		mov_11,2,1,atk_12,atk_47,
+		mov_5,1,1,atk_7,
+		mov_12,2,1,atk_3,atk_47,
+		mov_5,1,1,atk_47,
+		mov_9,2,1,atk_11,atk_47,
+		mov_5,1,1,atk_11,
+		mov_11,2,1,atk_47,atk_9,
+		mov_5,1,1,atk_8,
+		mov_4,1,1,atk_7,
+		mov_8,2,1,atk_7,atk_5,
+		mov_10,2,1,atk_7,atk_5,
+		mov_4,1,1,atk_7,
+		mov_8,1,1,atk_5,
+		mov_7,1,1,atk_7,
+		mov_4,2,1,atk_7,atk_5,
+		mov_5,1,1,atk_47,
+		mov_9,2,1,atk_8,atk_47,
+		mov_5,1,1,atk_12,
+		mov_11,2,1,atk_12,atk_47,
+		mov_5,1,1,atk_12,
+		mov_12,2,1,atk_3,atk_47,
+		mov_5,1,1,atk_47,
+		mov_9,2,1,atk_11,atk_47,
+		mov_5,1,1,atk_11,
+		mov_11,2,1,atk_47,atk_9,
+		mov_5,1,1,atk_8,
+		mov_4,2,1,atk_7,atk_5,
+		mov_8,1,1,atk_5,
+		mov_10,2,1,atk_7,atk_5,
+		mov_4,2,1,atk_7,atk_5,
+		mov_8,1,1,atk_5,
+		mov_10,2,1,atk_7,atk_5,
+		mov_4,2,1,atk_7,atk_5</term>
+	
+	<term key="strat_3">mov_14,1,1,atk_5,
+		mov_9,2,1,atk_3,atk_37,
+		mov_14,1,1,atk_12,
+		mov_11,2,1,atk_12,atk_37,
+		mov_14,1,1,atk_45,
+		mov_12,2,1,atk_1,atk_47,
+		mov_14,1,1,atk_44,
+		mov_9,2,1,atk_43,atk_37,
+		mov_14,1,1,atk_11,
+		mov_11,2,1,atk_37,atk_9,
+		mov_14,1,1,atk_44,
+		mov_4,1,1,atk_43,
+		mov_8,2,1,atk_44,atk_5,
+		mov_10,2,1,atk_5,atk_5,
+		mov_4,1,1,atk_5,
+		mov_8,1,1,atk_37,
+		mov_7,1,1,atk_6,
+		mov_4,2,1,atk_5,atk_45,
+		mov_14,1,1,atk_47,
+		mov_9,2,1,atk_37,atk_47,
+		mov_14,1,1,atk_12,
+		mov_11,2,1,atk_37,atk_47,
+		mov_14,1,1,atk_12,
+		mov_12,2,1,atk_3,atk_47,
+		mov_14,1,1,atk_37,
+		mov_9,2,1,atk_44,atk_47,
+		mov_14,1,1,atk_11,
+		mov_11,2,1,atk_47,atk_43,
+		mov_14,1,1,atk_3,
+		mov_4,2,1,atk_5,atk_5,
+		mov_8,1,1,atk_5,
+		mov_10,2,1,atk_37,atk_5,
+		mov_4,2,1,atk_45,atk_5,
+		mov_8,1,1,atk_5,
+		mov_10,2,1,atk_37,atk_5,
+		mov_4,2,1,atk_5,atk_5</term>
+
+	<term key="strat_4">mov_5,1,1,atk_49,
+		mov_9,2,1,atk_50,atk_49,
+		mov_5,1,1,atk_50,
+		mov_11,2,1,atk_50,atk_49,
+		mov_5,1,1,atk_50,
+		mov_8,2,1,atk_49,atk_49,
+		mov_5,1,1,atk_49,
+		mov_9,2,1,atk_50,atk_49,
+		mov_5,1,1,atk_50,
+		mov_11,2,1,atk_49,atk_9,
+		mov_5,1,1,atk_50,
+		mov_4,1,1,atk_50,
+		mov_8,2,1,atk_7,atk_49,
+		mov_10,2,1,atk_7,atk_49,
+		mov_4,1,1,atk_50,
+		mov_8,1,1,atk_49,
+		mov_7,1,1,atk_7,
+		mov_4,2,1,atk_47,atk_48,
+		mov_5,1,1,atk_49,
+		mov_9,2,1,atk_50,atk_49,
+		mov_5,1,1,atk_12,
+		mov_11,2,1,atk_50,atk_49,
+		mov_5,1,1,atk_50,
+		mov_8,2,1,atk_48,atk_49,
+		mov_5,1,1,atk_49,
+		mov_9,2,1,atk_50,atk_49,
+		mov_5,1,1,atk_50,
+		mov_11,2,1,atk_49,atk_9,
+		mov_5,1,1,atk_8,
+		mov_4,2,1,atk_47,atk_48,
+		mov_8,1,1,atk_49,
+		mov_10,2,1,atk_50,atk_49,
+		mov_4,2,1,atk_50,atk_49,
+		mov_8,1,1,atk_49,
+		mov_10,2,1,atk_50,atk_49,
+		mov_4,2,1,atk_7,atk_5</term>	
+
+		<term key="strat_5">mov_5,1,1,atk_49,
+		mov_9,2,1,atk_50,atk_25,
+		mov_5,1,1,atk_31,
+		mov_11,2,1,atk_50,atk_49,
+		mov_5,1,1,atk_50,
+		mov_8,2,1,atk_25,atk_43,
+		mov_5,1,1,atk_19,
+		mov_9,2,1,atk_31,atk_49,
+		mov_5,1,1,atk_50,
+		mov_11,2,1,atk_43,atk_19,
+		mov_5,1,1,atk_50,
+		mov_4,1,1,atk_31,
+		mov_8,2,1,atk_7,atk_25,
+		mov_10,2,1,atk_7,atk_49,
+		mov_4,1,1,atk_25,
+		mov_8,1,1,atk_19,
+		mov_7,1,1,atk_7,
+		mov_4,2,1,atk_43,atk_48,
+		mov_5,1,1,atk_31,
+		mov_9,2,1,atk_50,atk_49,
+		mov_5,1,1,atk_12,
+		mov_11,2,1,atk_50,atk_31,
+		mov_5,1,1,atk_31,
+		mov_8,2,1,atk_48,atk_43,
+		mov_5,1,1,atk_25,
+		mov_9,2,1,atk_50,atk_19,
+		mov_5,1,1,atk_50,
+		mov_11,2,1,atk_49,atk_19,
+		mov_5,1,1,atk_8,
+		mov_4,2,1,atk_31,atk_19,
+		mov_8,1,1,atk_49,
+		mov_10,2,1,atk_50,atk_49,
+		mov_4,2,1,atk_50,atk_49,
+		mov_8,1,1,atk_49,
+		mov_10,2,1,atk_50,atk_43,
+		mov_4,2,1,atk_7,atk_5</term>
+
+		<term key="strat_6">mov_5,1,1,atk_49,
+		mov_9,2,1,atk_50,atk_25,
+		mov_5,1,1,atk_31,
+		mov_11,2,1,atk_50,atk_49,
+		mov_5,1,1,atk_50,
+		mov_15,2,1,atk_25,atk_43,
+		mov_5,1,1,atk_19,
+		mov_9,2,1,atk_31,atk_49,
+		mov_5,1,1,atk_50,
+		mov_11,2,1,atk_43,atk_19,
+		mov_5,1,1,atk_50,
+		mov_4,1,1,atk_31,
+		mov_15,2,1,atk_7,atk_25,
+		mov_10,2,1,atk_7,atk_49,
+		mov_4,1,1,atk_25,
+		mov_15,1,1,atk_19,
+		mov_7,1,1,atk_7,
+		mov_4,2,1,atk_43,atk_48,
+		mov_5,1,1,atk_47,
+		mov_9,2,1,atk_50,atk_49,
+		mov_5,1,1,atk_12,
+		mov_11,2,1,atk_50,atk_31,
+		mov_5,1,1,atk_31,
+		mov_15,2,1,atk_48,atk_43,
+		mov_5,1,1,atk_25,
+		mov_9,2,1,atk_50,atk_19,
+		mov_5,1,1,atk_50,
+		mov_11,2,1,atk_49,atk_19,
+		mov_5,1,1,atk_8,
+		mov_4,2,1,atk_31,atk_19,
+		mov_15,1,1,atk_49,
+		mov_10,2,1,atk_50,atk_49,
+		mov_4,2,1,atk_50,atk_49,
+		mov_15,1,1,atk_47,
+		mov_10,2,1,atk_50,atk_43,
+		mov_4,2,1,atk_7,atk_5</term>
+
+	
+		<term key="strat_7">mov_5,1,1,atk_49,
+		mov_9,2,1,atk_50,atk_25,
+		mov_5,1,1,atk_40,
+		mov_11,2,1,atk_50,atk_49,
+		mov_5,1,1,atk_50,
+		mov_8,2,1,atk_25,atk_43,
+		mov_5,1,1,atk_40,
+		mov_9,2,1,atk_31,atk_49,
+		mov_5,1,1,atk_50,
+		mov_11,2,1,atk_43,atk_19,
+		mov_5,1,1,atk_40,
+		mov_4,1,1,atk_31,
+		mov_8,2,1,atk_7,atk_25,
+		mov_10,2,1,atk_7,atk_49,
+		mov_4,1,1,atk_25,
+		mov_8,1,1,atk_19,
+		mov_7,1,1,atk_40,
+		mov_4,2,1,atk_43,atk_48,
+		mov_5,1,1,atk_47,
+		mov_9,2,1,atk_50,atk_49,
+		mov_5,1,1,atk_40,
+		mov_11,2,1,atk_50,atk_31,
+		mov_5,1,1,atk_31,
+		mov_8,2,1,atk_48,atk_43,
+		mov_5,1,1,atk_25,
+		mov_9,2,1,atk_50,atk_19,
+		mov_5,1,1,atk_50,
+		mov_11,2,1,atk_49,atk_19,
+		mov_5,1,1,atk_40,
+		mov_4,2,1,atk_31,atk_19,
+		mov_8,1,1,atk_49,
+		mov_10,2,1,atk_50,atk_49,
+		mov_4,2,1,atk_50,atk_49,
+		mov_8,1,1,atk_40,
+		mov_10,2,1,atk_50,atk_43,
+		mov_4,2,1,atk_7,atk_5</term>
+
+		<term key="strat_8">mov_5,1,1,atk_49,
+		mov_16,2,1,atk_50,atk_25,
+		mov_5,1,1,atk_31,
+		mov_11,2,1,atk_50,atk_49,
+		mov_5,1,1,atk_40,
+		mov_15,2,1,atk_25,atk_43,
+		mov_5,1,1,atk_19,
+		mov_16,2,1,atk_31,atk_49,
+		mov_5,1,1,atk_40,
+		mov_11,2,1,atk_43,atk_19,
+		mov_5,1,1,atk_40,
+		mov_16,1,1,atk_31,
+		mov_15,2,1,atk_7,atk_25,
+		mov_16,2,1,atk_7,atk_49,
+		mov_16,1,1,atk_25,
+		mov_15,1,1,atk_40,
+		mov_5,1,1,atk_7,
+		mov_15,2,1,atk_43,atk_48,
+		mov_5,1,1,atk_47,
+		mov_16,2,1,atk_50,atk_49,
+		mov_5,1,1,atk_40,
+		mov_11,2,1,atk_50,atk_31,
+		mov_5,1,1,atk_31,
+		mov_15,2,1,atk_48,atk_43,
+		mov_5,1,1,atk_40,
+		mov_16,2,1,atk_50,atk_19,
+		mov_5,1,1,atk_50,
+		mov_11,2,1,atk_49,atk_19,
+		mov_5,1,1,atk_40,
+		mov_15,2,1,atk_31,atk_19,
+		mov_15,1,1,atk_49,
+		mov_16,2,1,atk_50,atk_49,
+		mov_16,2,1,atk_50,atk_49,
+		mov_15,1,1,atk_40,
+		mov_16,2,1,atk_50,atk_43,
+		mov_15,2,1,atk_7,atk_5</term>
+
+	<term key="strat_9">mov_5,1,1,atk_49,
+		mov_16,2,1,atk_50,atk_25,
+		mov_5,1,1,atk_31,
+		mov_11,2,1,atk_50,atk_49,
+		mov_5,1,1,atk_40,
+		mov_15,2,1,atk_25,atk_43,
+		mov_5,1,1,atk_19,
+		mov_16,2,1,atk_31,atk_49,
+		mov_5,1,1,atk_50,
+		mov_11,2,1,atk_43,atk_19,
+		mov_5,1,1,atk_40,
+		mov_16,1,1,atk_31,
+		mov_15,2,1,atk_7,atk_25,
+		mov_16,2,1,atk_7,atk_49,
+		mov_16,1,1,atk_25,
+		mov_15,1,1,atk_19,
+		mov_5,1,1,atk_7,
+		mov_15,2,1,atk_43,atk_48,
+		mov_5,1,1,atk_40,
+		mov_16,2,1,atk_50,atk_49,
+		mov_5,1,1,atk_40,
+		mov_11,2,1,atk_50,atk_31,
+		mov_5,1,1,atk_31,
+		mov_15,2,1,atk_48,atk_43,
+		mov_5,1,1,atk_25,
+		mov_16,2,1,atk_50,atk_19,
+		mov_5,1,1,atk_50,
+		mov_11,2,1,atk_49,atk_19,
+		mov_5,1,1,atk_40,
+		mov_15,2,1,atk_31,atk_19,
+		mov_15,1,1,atk_49,
+		mov_16,2,1,atk_50,atk_49,
+		mov_16,2,1,atk_50,atk_49,
+		mov_15,1,1,atk_40,
+		mov_16,2,1,atk_50,atk_43,
+		mov_15,2,1,atk_7,atk_5</term>
+
+	
+	<term key="strat_10">mov_5,1,1,atk_49,
+		mov_16,2,1,atk_50,atk_25,
+		mov_5,1,1,atk_31,
+		mov_11,2,1,atk_40,atk_49,
+		mov_5,1,1,atk_50,
+		mov_15,2,1,atk_25,atk_43,
+		mov_5,1,1,atk_19,
+		mov_9,2,1,atk_31,atk_49,
+		mov_5,1,1,atk_50,
+		mov_11,2,1,atk_43,atk_19,
+		mov_5,1,1,atk_40,
+		mov_15,1,1,atk_31,
+		mov_15,2,1,atk_7,atk_25,
+		mov_16,2,1,atk_7,atk_49,
+		mov_16,1,1,atk_25,
+		mov_15,1,1,atk_19,
+		mov_5,1,1,atk_7,
+		mov_15,2,1,atk_43,atk_48,
+		mov_5,1,1,atk_47,
+		mov_9,2,1,atk_40,atk_49,
+		mov_5,1,1,atk_40,
+		mov_11,2,1,atk_50,atk_31,
+		mov_5,1,1,atk_31,
+		mov_15,2,1,atk_48,atk_43,
+		mov_5,1,1,atk_25,
+		mov_9,2,1,atk_50,atk_19,
+		mov_5,1,1,atk_50,
+		mov_11,2,1,atk_49,atk_19,
+		mov_5,1,1,atk_40,
+		mov_15,2,1,atk_31,atk_19,
+		mov_15,1,1,atk_49,
+		mov_16,2,1,atk_50,atk_49,
+		mov_16,2,1,atk_50,atk_49,
+		mov_15,1,1,atk_40,
+		mov_16,2,1,atk_50,atk_43,
+		mov_15,2,1,atk_7,atk_5</term>
+
+	<!--  HP de cada parte de la nave por nivel  -->
+	<!--  =================  -->
+	<term key="ship_part_hp_level_1">1800</term> <!-- 2000  -->
+	<term key="ship_part_hp_level_2">3500</term> <!-- 4000  -->
+	<term key="ship_part_hp_level_3">5000</term> <!-- 5000  -->
+	<term key="ship_part_hp_level_4">5500</term> <!-- 6000  -->
+	<term key="ship_part_hp_level_5">5000</term> <!-- 6000  -->
+	<term key="ship_part_hp_level_6">4500</term> <!-- 5000  -->
+	<term key="ship_part_hp_level_7">3500</term> <!-- 5000  -->
+	<term key="ship_part_hp_level_8">3400</term>
+	<term key="ship_part_hp_level_9">2000</term>
+	<term key="ship_part_hp_level_10">2800</term>
+
+	<!--  Factor por el cual se reduce el daño a una parte, elevado a la cantidad de "hijos" de la parte  -->
+	<!--  =================  -->
+	<term key="ship_child_reduction_factor_level_1">0.3</term>
+	<term key="ship_child_reduction_factor_level_2">0.3</term>
+	<term key="ship_child_reduction_factor_level_3">0.3</term>
+	<term key="ship_child_reduction_factor_level_4">0.3</term>
+	<term key="ship_child_reduction_factor_level_5">0.3</term>
+	<term key="ship_child_reduction_factor_level_6">0.3</term>
+	<term key="ship_child_reduction_factor_level_7">0.3</term>
+	<term key="ship_child_reduction_factor_level_8">0.3</term>
+	<term key="ship_child_reduction_factor_level_9">0.3</term>
+	<term key="ship_child_reduction_factor_level_10">0.3</term>
+
+	<!--  VELOCIDAD CUANDO LA NAVE ES DESTRUIDA  -->
+	<!--  =====================================  -->
+	<term key="ship_destroyed_leaving_speed">-10</term>
+	<term key="ship_destroyed_leaving_limit_y">-300</term>
+
+
+
+	<!--  MUSICAS POR NIVEL  -->
+	<!--  =================  -->
+	<term key="music_id_level_1">MusicScenery1</term>
+	
+	
+	<!--  CONTROLS  -->
+	<!--  ========  -->
+	<term key="simultaneous_keys_frames_tolerance">10</term>
+	
+	
+	<!--  SCENERIES LAYERS  -->
+	<!--  ================  -->
+    <term key="scenery_type_level_1">regular</term>
+    <term key="scenery_name_level_1">street</term>
+	
+	<!--  SCENERY LAYERS SCROLL  -->
+	<!--  =====================  -->
+	<!--  SCENERY 1 - Puente  -->
+	<term key="scenery_street_background_solid_depth_horizontal">1</term>
+	<term key="scenery_street_background_solid_depth_vertical">1</term>	
+	<term key="scenery_street_background_1_depth_horizontal">1</term>
+	<term key="scenery_street_background_1_depth_vertical">1</term>
+	<term key="scenery_street_background_2_depth_horizontal">1</term>
+	<term key="scenery_street_background_2_depth_vertical">1</term>
+	<term key="scenery_street_background_3_depth_horizontal">1</term>
+	<term key="scenery_street_background_3_depth_vertical">1</term>
+	<term key="scenery_street_background_4_depth_horizontal">1</term>
+	<term key="scenery_street_background_4_depth_vertical">1</term>	
+	<term key="scenery_street_foreground_1_depth_horizontal">1</term>
+	<term key="scenery_street_foreground_1_depth_vertical">1</term>
+	<term key="scenery_street_foreground_2_depth_horizontal">1</term>
+	<term key="scenery_street_foreground_2_depth_vertical">1</term>	
+
+	
+	
+	<!--  PLAYER SCREEN POSITION  -->
+	<!--  ======================  -->
+	<term key="floor_y_level_1">300</term>
+	
+	<!--  CAMERA  -->
+	<!--  ======  -->
+	<term key="max_scroll_step_px_level_1">15</term>
+	<term key="camera_init_x_level_1">0</term>
+	<term key="camera_init_y_level_1">51</term>
+	<!--  MARGINS TO START SCROLLING  -->
+	<term key="screen_margin_left_level_1">200</term>
+	<term key="screen_margin_right_level_1">200</term>
+	<term key="screen_margin_top_level_1">200</term>
+	<term key="screen_margin_bottom_level_1">90</term>
+	
+	
+	
+	
+	<!--  PLAYER MOVEMENT  -->
+	<!--  ===============  -->
+	<term key="run-speed-horizontal">.4</term>
+	<term key="run-speed-horizontal-diagonal">.3</term>
+	<term key="run-speed-vertical">.21</term>
+	<term key="run-speed-vertical-diagonal">.12</term>
+	
+</config>
