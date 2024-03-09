@@ -8,7 +8,7 @@ var ruffle2;
 function Mobile() { return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent); }
 
 var mobileWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-var mobileHeight = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+var mobileHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height;
 
 swfobject.embedSWF = function(url, cont, width, height){
     var ruffle = window.RufflePlayer.newest(),
