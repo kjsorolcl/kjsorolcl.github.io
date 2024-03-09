@@ -1,0 +1,32 @@
+<div id='ruffle'></div>
+        <script src='https://unpkg.com/@ruffle-rs/ruffle'></script>
+        <script>
+var swfobject = {};
+var player2;
+var ruffle2;
+
+function Mobile() { return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent); }
+
+var mobileWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+var mobileHeight = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+
+swfobject.embedSWF = function(url, cont, width, height){
+    var ruffle = window.RufflePlayer.newest(),
+        player = Object.assign(document.getElementById(cont).appendChild(ruffle.createPlayer()), {
+            width: width,
+            height: height,
+            style: 'width: ' + width + 'px; height: ' + height + 'px',
+        });
+    window.RufflePlayer.config = {
+        "autoplay": "on",
+        "unmuteOverlay": "hidden",
+        "preloader": false,
+        "warnOnUnsupportedContent": false
+    };
+    player.load({ url: url }).then(value=>{console.log('then');});
+    player2 = player;
+    ruffle2 = ruffle;
+}
+
+swfobject.embedSWF(location.href.split('?url=')[1], 'ruffle', mobileWidth, mobileHeight);
+        </script>
