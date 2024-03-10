@@ -1,5 +1,5 @@
 <div id='ruffle'></div>
-        <script src='https://unpkg.com/@ruffle-rs/ruffle'></script>
+        <script src='https://flashgamehouse.github.io/ruffle.js'></script>
         <script>
 var swfobject = {};
 var player2;
@@ -18,11 +18,12 @@ swfobject.embedSWF = function(url, cont, width, height){
             style: 'width: ' + width + 'px; height: ' + height + 'px',
         });
     window.RufflePlayer.config = {
-        "autoplay": "on",
-        "unmuteOverlay": "hidden",
-        "preloader": false,
-        "warnOnUnsupportedContent": false,
-        "ContextMenu": false
+        autoplay: "on",
+        unmuteOverlay: "hidden",
+        preloader: false,
+        warnOnUnsupportedContent: false,
+        menu:false,
+        showContextMenu: false,
     };
     player.load({ url: url }).then(value=>{console.log('then');});
     player2 = player;
@@ -30,4 +31,6 @@ swfobject.embedSWF = function(url, cont, width, height){
 }
 
 swfobject.embedSWF(location.href.split('?url=')[1], 'ruffle', mobileWidth, mobileHeight);
+
         </script>
+        
