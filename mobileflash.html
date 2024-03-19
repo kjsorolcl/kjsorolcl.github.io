@@ -13,6 +13,9 @@ var mobileHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height
 if(location.href.split('width=').length > 1) {
     mobileWidth = parseInt(location.href.split('width=')[1].split("&"[0]));
 }
+if (location.href.split('height=').length > 1) {
+    mobileHeight = parseInt(location.href.split('height=')[1].split("&"[0]));
+}
 
 swfobject.embedSWF = function(url, cont, width, height){
     var ruffle = window.RufflePlayer.newest(),
