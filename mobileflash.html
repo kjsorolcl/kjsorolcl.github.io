@@ -43,7 +43,7 @@ swfobject.embedSWF = function(url, cont, width, height){
     ruffle2 = ruffle;
 }
 
-setTimeout(()=>swfobject.embedSWF(location.href.split('?url=')[1].split("&")[0], 'ruffle', mobileWidth, mobileHeight), 200);
+setTimeout(()=>swfobject.embedSWF(location.href.split('?url=')[1].split("&")[0], 'ruffle', mobileWidth, mobileHeight), 1000);
 
     // 더블 탭 이벤트를 감지하여 기본 동작 중지
     var lastTouchEnd = 0;
