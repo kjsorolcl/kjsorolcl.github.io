@@ -43,19 +43,35 @@ swfobject.embedSWF = function(url, cont, width, height){
     ruffle2 = ruffle;
     player2.enterFullscreen();
 }
-window.addEventListener('DOMContentLoaded', (event) => {
-    swfobject.embedSWF(location.href.split('?url=')[1].split("&")[0], 'ruffle', mobileWidth, mobileHeight);
 
-    // 더블 탭 이벤트를 감지하여 기본 동작 중지
-    var lastTouchEnd = 0;
-    document.addEventListener('touchend', function (event) {
-        var now = (new Date()).getTime();
-        if (now - lastTouchEnd <= 300) {
-            event.preventDefault();
+var pollCount=0;
+
+//get the window Height
+var pollWindowHeight=function(){
+    //poll the window innerHeight 10s
+    if(window.innerHeight==0){
+        pollCount+=1;
+
+        if(pollCount<200)   {
+            setTimeout(pollWindowHeight,50);
+        }else{
+            
         }
-        lastTouchEnd = now;
-    }, false);
-});
+    }else{
+        swfobject.embedSWF(location.href.split('?url=')[1].split("&")[0], 'ruffle', mobileWidth, mobileHeight);
+
+        // 더블 탭 이벤트를 감지하여 기본 동작 중지
+        var lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            var now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    }
+}
+document.addEventListener("DOMContentLoaded",pollWindowHeight, false);
 
         </script>
         
