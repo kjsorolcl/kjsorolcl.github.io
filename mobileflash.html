@@ -7,8 +7,8 @@ var ruffle2;
 
 function Mobile() { return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent); }
 
-var mobileWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-var mobileHeight = (window.innerHeight > 0) ? window.innerHeight : screen.height;
+var mobileWidth = screen.width;
+var mobileHeight = screen.height;
 
 if(location.href.split('width=').length > 1) {
     mobileWidth = parseInt(location.href.split('width=')[1].split("&"[0]));
@@ -41,9 +41,10 @@ swfobject.embedSWF = function(url, cont, width, height){
     player.load({ url: url }).then(value=>{console.log('then');});
     player2 = player;
     ruffle2 = ruffle;
+    player2.enterFullscreen();
 }
 
-setTimeout(()=>swfobject.embedSWF(location.href.split('?url=')[1].split("&")[0], 'ruffle', mobileWidth, mobileHeight), 1000);
+swfobject.embedSWF(location.href.split('?url=')[1].split("&")[0], 'ruffle', mobileWidth, mobileHeight);
 
     // 더블 탭 이벤트를 감지하여 기본 동작 중지
     var lastTouchEnd = 0;
