@@ -1,9 +1,10 @@
 <div id='ruffle'></div>
-        <script src='https://flashgamehouse.github.io/ruffle.js'></script>
+
         <script>
 var swfobject = {};
 var player2;
 var ruffle2;
+var isLoadScript = false;
 
 function Mobile() { return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent); }
 
@@ -17,39 +18,63 @@ if (location.href.split('height=').length > 1) {
     mobileHeight = parseInt(location.href.split('height=')[1].split("&"[0]));
 }
 
-swfobject.embedSWF = function(url, cont, width, height){
-    var ruffle = window.RufflePlayer.newest(),
-        player = Object.assign(document.getElementById(cont).appendChild(ruffle.createPlayer()), {
-            width: width,
-            height: height,
-            style: 'width: ' + width + 'px; height: ' + height + 'px',
-        });
-        let isFullScreen = false;
-        if(location.href.split('full=').length > 1) {
-            isFullScreen = location.href.split('full=')[1].split("&"[0]) == "1" ? true : false;
-        }
-    window.RufflePlayer.config = {
-        autoplay: "on",
-        unmuteOverlay: "hidden",
-        preloader: false,
-        warnOnUnsupportedContent: false,
-        menu:false,
-        showContextMenu: false,
-        forceScale: isFullScreen,
-        forceAlign: isFullScreen,
-    };
-    player.load({ url: url }).then(value=>{console.log('then');});
-    player2 = player;
-    ruffle2 = ruffle;
-    player2.enterFullscreen();
+let isUnpkg = false;
+
+if (location.href.split('unpkg=').length > 1) {
+    isUnpkg = location.href.split('unpkg=')[1].split("&")[0] == "1" ? true : false;
 }
+
+var scriptUrl = isUnpkg ? 'https://unpkg.com/@ruffle-rs/ruffle' : 'https://flashgamehouse.github.io/ruffle.js';
+
+// 새로운 script 요소 생성
+var script = document.createElement('script');
+
+script.type = 'text/javascript';
+script.async = true;
+// src 속성 설정
+script.src = scriptUrl;
+script.onload = function() {
+    isLoadScript = true;
+    swfobject.embedSWF = function (url, cont, width, height) {
+        var ruffle = window.RufflePlayer.newest(),
+            player = Object.assign(document.getElementById(cont).appendChild(ruffle.createPlayer()), {
+                width: width,
+                height: height,
+                style: 'width: ' + width + 'px; height: ' + height + 'px',
+            });
+        let isFullScreen = false;
+
+        if (location.href.split('full=').length > 1) {
+            isFullScreen = location.href.split('full=')[1].split("&")[0] == "1" ? true : false;
+        }
+        window.RufflePlayer.config = {
+            autoplay: "on",
+            unmuteOverlay: "hidden",
+            preloader: false,
+            warnOnUnsupportedContent: false,
+            menu: false,
+            showContextMenu: false,
+            forceScale: isFullScreen,
+            forceAlign: isFullScreen,
+        };
+
+        player.load({ url: url }).then(value => { console.log('then'); });
+        player2 = player;
+        ruffle2 = ruffle;
+        player2.enterFullscreen();
+    }
+}
+
+// HTML의 head 또는 body 요소에 script 요소 추가
+document.head.appendChild(script);
+
 
 var pollCount=0;
 
 //get the window Height
 var pollWindowHeight=function(){
     //poll the window innerHeight 10s
-    if(window.innerHeight==0){
+    if(window.innerHeight==0 || !isLoadScript){
         pollCount+=1;
 
         if(pollCount<200)   {
