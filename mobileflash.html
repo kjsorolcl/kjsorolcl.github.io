@@ -83,6 +83,14 @@ var pollWindowHeight=function(){
             
         }
     }else{
+        mobileWidth = window.innerWidth;
+        mobileHeight = window.innerHeight;
+        if (location.href.split('width=').length > 1) {
+            mobileWidth = parseInt(location.href.split('width=')[1].split("&"[0]));
+        }
+        if (location.href.split('height=').length > 1) {
+            mobileHeight = parseInt(location.href.split('height=')[1].split("&"[0]));
+        }
         swfobject.embedSWF(location.href.split('?url=')[1].split("&")[0], 'ruffle', mobileWidth, mobileHeight);
 
         // 더블 탭 이벤트를 감지하여 기본 동작 중지
