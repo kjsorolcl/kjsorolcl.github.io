@@ -19,12 +19,17 @@ if (location.href.split('height=').length > 1) {
 }
 
 let isUnpkg = false;
-
+let isFullScreen = false;
+                
 if (location.href.split('unpkg=').length > 1) {
     isUnpkg = location.href.split('unpkg=')[1].split("&")[0] == "1" ? true : false;
 }
+if (location.href.split('full=').length > 1) {
+        isFullScreen = location.href.split('full=')[1].split("&")[0] == "1" ? true : false;
+}
 
-var scriptUrl = isUnpkg ? 'https://unpkg.com/@ruffle-rs/ruffle' : 'https://kjsorolcl.github.io/mobile/ruffle.js';
+var scriptUrl = isFullScreen ? 'https://kjsorolcl.github.io/mobile/ruffle.js' : 
+    (isUnpkg ? 'https://unpkg.com/@ruffle-rs/ruffle' : 'https://kjsorolcl.github.io/mobile/ruffle.js');
 
 // 새로운 script 요소 생성
 var script = document.createElement('script');
@@ -42,11 +47,7 @@ script.onload = function() {
                 height: height,
                 style: 'width: ' + width + 'px; height: ' + height + 'px',
             });
-        let isFullScreen = false;
 
-        if (location.href.split('full=').length > 1) {
-            isFullScreen = location.href.split('full=')[1].split("&")[0] == "1" ? true : false;
-        }
         window.RufflePlayer.config = {
             autoplay: "on",
             unmuteOverlay: "hidden",
