@@ -14,10 +14,6 @@
     var player2;
     var ruffle2;
 
-    function Mobile() { return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent); }
-    var flashWidth = 0;
-    var mobileWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-    flashWidth = Mobile() ? mobileWidth : 870;
     swfobject.embedSWF = function (url, cont, width, height) {
         var ruffle = window.RufflePlayer.newest(),
             player = Object.assign(document.getElementById(cont).appendChild(ruffle.createPlayer()), {
@@ -27,10 +23,12 @@
             });
         window.RufflePlayer.config = { autoplay: "false" };
         player.baseURI = "https://kjsorolcl.github.io";
+        player.style.width = "100%";
+        player.style.height = "600px";
         player.load({ url: url }).then(value => { console.log('then'); });
         player2 = player;
         ruffle2 = ruffle;
     }
 
-    swfobject.embedSWF(location.href.split('?')[1], 'ruffle', flashWidth, 600);
+    swfobject.embedSWF(location.href.split('?')[1], 'ruffle');
 </script>
