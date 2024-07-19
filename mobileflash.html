@@ -19,17 +19,20 @@ if (location.href.split('height=').length > 1) {
 }
 
 let isUnpkg = false;
+let isAgoVer = false;
 let isFullScreen = false;
                 
-if (location.href.split('unpkg=').length > 1) {
+if (location.href.split('unpkg=').length > 1)
     isUnpkg = location.href.split('unpkg=')[1].split("&")[0] == "1" ? true : false;
-}
-if (location.href.split('full=').length > 1) {
+if (location.href.split('ago=').length > 1)
+        isAgoVer = location.href.split('ago=')[1].split("&")[0] == "1" ? true : false;
+
+if (location.href.split('full=').length > 1)
         isFullScreen = location.href.split('full=')[1].split("&")[0] == "1" ? true : false;
-}
 
 var scriptUrl = isFullScreen ? 'https://flashgamehouse.github.io/ruffle.js' : 
     (isUnpkg ? 'https://flashgamehouse.github.io/240607/ruffle.js' : 'https://kjsorolcl.github.io/mobile/ruffle.js');
+if(isAgoVer) scriptUrl = 'https://kjsorolcl.github.io/ruffle_nightly_2021_01_17_selfhosted/ruffle.js';
 
 // 새로운 script 요소 생성
 var script = document.createElement('script');
