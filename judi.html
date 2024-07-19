@@ -1,5 +1,13 @@
 <div id='ruffle'></div>
 <script src='https://unpkg.com/@ruffle-rs/ruffle'></script>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        var allowedReferrer = "https://www.memory-finder.com";
+        if (document.referrer.indexOf(allowedReferrer) === -1) {
+            window.location = "https://www.memory-finder.com";
+        }
+    });
+</script>
 <script>
     var swfobject = {};
     var player2;
