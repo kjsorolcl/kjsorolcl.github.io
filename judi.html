@@ -4,6 +4,7 @@
     document.addEventListener("DOMContentLoaded", function () {
             if (document.referrer.indexOf("https://www.memory-finder.com") === -1
                 && document.referrer.indexOf("https://memoryarchive.blog/") === -1 
+                && document.referrer.indexOf("https://gamejit.com/") === -1 
                 && document.referrer.indexOf("https://flash-game-house.tistory.com/") === -1) {
                 alert("잘못된 접근입니다.");
                 window.location = "https://www.google.com";
