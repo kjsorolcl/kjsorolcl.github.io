@@ -1,0 +1,60 @@
+<div id='ruffle'></div>
+<script src='https://unpkg.com/@ruffle-rs/ruffle@0.1.0-nightly.2023.12.30'></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        if (document.referrer.indexOf("https://www.memory-finder.com") === -1
+            && document.referrer.indexOf("https://memoryarchive.blog/") === -1
+            && document.referrer.indexOf("https://gamejit.com/") === -1
+            && document.referrer.indexOf("https://flash-game-house.tistory.com/") === -1) {
+            alert("잘못된 접근입니다.");
+            window.location = "https://www.google.com";
+        }
+    });
+
+    var swfobject = {};
+    var player2;
+    var ruffle2;
+
+    swfobject.embedSWF = function (url, cont, width, height) {
+        var ruffle = window.RufflePlayer.newest(),
+            player = Object.assign(document.getElementById(cont).appendChild(ruffle.createPlayer()), {
+                width: width,
+                height: height,
+                style: 'width: ' + width + 'px; height: ' + height + 'px',
+            });
+        window.RufflePlayer.config = {
+            "allowNetworking": "all",
+            "allowScriptAccess": true,
+            "autoplay": "auto",
+            "letterbox": "on",
+            "contextMenu": "on",
+            "logLevel": "error",
+            "polyfills": false,
+            "showSwfDownload": false,
+            "maxExecutionDuration": 300,
+            "openUrlMode": "confirm",
+            "forceAlign": true,
+            "forceScale": true,
+            "fontSources": [
+                "https://kjsorolcl.github.io/Noto%20Sans.swf",
+                "https://kjsorolcl.github.io/%E1%84%83%E1%85%A9%E1%86%AE%E1%84%8B%E1%85%AE%E1%86%B7.swf",
+                "https://kjsorolcl.github.io/font/%E1%84%80%E1%85%AE%E1%86%AF%E1%84%85%E1%85%B5%E1%86%B7.swf"
+            ],
+            "defaultFonts": {
+                "sans": [
+                    "굴림", "나눔", "Noto Sans", "돋움", "Arial", "Helvetica", "sans-serif"
+                ]
+            },
+            "playerVersion": null,
+            "warnOnUnsupportedContent": false
+        };
+        player.baseURI = "https://kjsorolcl.github.io";
+        player.style.width = "100%";
+        player.style.height = "600px";
+        player.load({ url: url }).then(value => { console.log('then'); });
+        player2 = player;
+        ruffle2 = ruffle;
+    }
+
+    swfobject.embedSWF("https://kjsorolcl.github.io/freshman_kor.swf", 'ruffle');
+</script>
