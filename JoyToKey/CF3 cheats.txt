@@ -1,0 +1,32 @@
+CAPOEIRA FIGHTER 3 HOW TO PLAY
+
+START THE GAME - run CF3.exe to play
+HOW TO PLAY - see ingame tutorial for play instructions
+
+
+
+CAPOEIRA FIGHTER 3 TESTING CHEATS
+
+* you must enter the cheat "tester" to use the WIN MaTCH cheat *
+
+WIN MATCH - during any match press k then 1 or 2 to KO that player and finish the match
+FREE CREDITS - at the character selection menu pres io9 then press m as many times as you want to get +1000 credits
+WATCH CINEMATICS - use loadtest.swf to browse cutscenes and endings for any character
+
+
+
+GAMEPLAY CHEATS (enter using password button on the bottom of the game mode screen):
+
+muito - unlocks impossible arcade, and survival modes
+morte - relocks all unlockable content (restores the game to the out of the box state)
+zum - start survival mode on round 10
+rapido - permanent speed (doesn't work in arcade, minigame or survival modes)
+vida - permanent regeneration and extra damage (doesn't work in arcade, minigame or survival modes)
+macumba - permanent hyper regeneration
+uber - speed, health and hyper cheats all at once
+
+
+
+send feedback to scott@spiritonin.com
+
+
