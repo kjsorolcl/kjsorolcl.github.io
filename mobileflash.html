@@ -3,173 +3,152 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <div id='ruffle'></div>
-
 <script>
-var swfobject = {};
-var player2;
-var ruffle2;
-var isLoadScript = false;
-
-function Mobile() { 
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent); 
-}
-
-var mobileWidth = window.innerWidth;
-var mobileHeight = window.innerHeight;
-
-// ✅ URL 파라미터 추출 (외부 + 내부 url 파라미터까지 병합)
-function getParams() {
-    const result = {};
-
-    // 1차: 현재 페이지 쿼리스트링 파싱
-    let queryString = window.location.search;
-
-    // ✅ ?가 여러 번 들어온 경우 → 첫 ?만 남기고 나머지는 & 처리
-    if (queryString.includes("?")) {
-        const parts = queryString.split("?");
-        queryString = parts.shift() + (parts.length ? "?" + parts.join("&") : "");
+    var swfobject = {};
+    var player2;
+    var ruffle2;
+    var isLoadScript = false;
+    
+    function Mobile() { 
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent); 
     }
-
-    const params = new URLSearchParams(queryString);
-    for (const [key, value] of params.entries()) {
-        result[key] = value;
-    }
-
-    // 2차: url 파라미터 안의 쿼리스트링도 파싱
-    if (result.url) {
-        try {
-            let urlStr = result.url;
-
-            // ✅ url 내부에서도 ?가 여러 번 쓰였으면 정리
-            if (urlStr.includes("?")) {
-                const [base, ...rest] = urlStr.split("?");
-                urlStr = base + "?" + rest.join("&");
+    
+    var mobileWidth = window.innerWidth;
+    var mobileHeight = window.innerHeight;
+    
+    // ✅ URL 파라미터 추출
+    function getParams() {
+        const result = {};
+        let queryString = window.location.search;
+    
+        if (queryString.includes("?")) {
+            const parts = queryString.split("?");
+            queryString = parts.shift() + (parts.length ? "?" + parts.join("&") : "");
+        }
+    
+        const params = new URLSearchParams(queryString);
+        for (const [key, value] of params.entries()) {
+            result[key] = value;
+        }
+    
+        if (result.url) {
+            try {
+                let urlStr = result.url;
+                if (urlStr.includes("?")) {
+                    const [base, ...rest] = urlStr.split("?");
+                    urlStr = base + "?" + rest.join("&");
+                }
+                const innerUrl = new URL(urlStr);
+                for (const [key, value] of innerUrl.searchParams.entries()) {
+                    result[key] = value;
+                }
+                result.url = innerUrl.origin + innerUrl.pathname;
+            } catch (e) {
+                console.error("잘못된 URL:", result.url, e);
             }
-
-            const innerUrl = new URL(urlStr);
-            for (const [key, value] of innerUrl.searchParams.entries()) {
-                result[key] = value; // 같은 key 있으면 덮어쓰기
+        }
+        return result;
+    }
+    
+    function getParam(name) {
+        return getParams()[name] || null;
+    }
+    
+    // width/height 적용
+    if (getParam("width")) mobileWidth = parseInt(getParam("width"));
+    if (getParam("height")) mobileHeight = parseInt(getParam("height"));
+    
+    let isUnpkg = getParam("unpkg") === "1";
+    let isAgoVer = getParam("ago") === "1";
+    let isFullScreen = getParam("full") === "1";
+    let isKoreanFont = getParam("koreanfont") === "1"; // ✅ 추가
+    
+    // quality 파라미터 처리
+    let qualityParam = getParam("quality");
+    let qualityMap = { "0": "low", "1": "medium", "2": "high" };
+    let qualityValue = qualityMap[qualityParam] || null;
+    
+    // 스크립트 선택
+    var scriptUrl = isFullScreen ? 'https://flashgamehouse.github.io/ruffle.js' : 
+        (isUnpkg ? 'https://flashgamehouse.github.io/240607/ruffle.js' : 'https://kjsorolcl.github.io/mobile/ruffle.js');
+    if (isAgoVer) {
+        scriptUrl = 'https://kjsorolcl.github.io/ruffle_nightly_2021_01_17_selfhosted/ruffle.js';
+    }
+    
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.async = true;
+    script.src = scriptUrl;
+    
+    script.onload = function() {
+        isLoadScript = true;
+        swfobject.embedSWF = function (url, cont, width, height) {
+            var ruffle = window.RufflePlayer.newest(),
+                player = Object.assign(document.getElementById(cont).appendChild(ruffle.createPlayer()), {
+                    width: width,
+                    height: height,
+                    style: 'width: ' + width + 'px; height: ' + height + 'px',
+                });
+    
+            // ✅ config 기본값
+            window.RufflePlayer.config = {
+                autoplay: "on",
+                unmuteOverlay: "hidden",
+                preloader: false,
+                warnOnUnsupportedContent: false,
+                menu: false,
+                showContextMenu: false,
+                forceScale: isFullScreen,
+                forceAlign: isFullScreen
+            };
+    
+            // ✅ koreanfont=1 이면 한글 폰트 적용
+            if (isKoreanFont) {
+                window.RufflePlayer.config.fontSources = [
+                    "https://kjsorolcl.github.io/Noto%20Sans.swf",
+                    "https://kjsorolcl.github.io/%E1%84%83%E1%85%A9%E1%86%AE%E1%84%8B%E1%85%AE%E1%86%B7.swf",
+                    "https://kjsorolcl.github.io/font/%E1%84%80%E1%85%AE%E1%86%AF%E1%84%85%E1%85%B5%E1%86%B7.swf"
+                ];
+                window.RufflePlayer.config.defaultFonts = {
+                    "sans": ["굴림", "나눔", "Noto Sans", "돋움", "Arial", "Helvetica", "sans-serif"]
+                };
             }
-            result.url = innerUrl.origin + innerUrl.pathname; // 순수 URL만 저장
-        } catch (e) {
-            console.error("잘못된 URL:", result.url, e);
-        }
-    }
-
-    return result;
-}
-
-function getParam(name) {
-    return getParams()[name] || null;
-}
-
-// width/height 적용
-if (getParam("width")) {
-    mobileWidth = parseInt(getParam("width"));
-}
-if (getParam("height")) {
-    mobileHeight = parseInt(getParam("height"));
-}
-
-let isUnpkg = getParam("unpkg") === "1";
-let isAgoVer = getParam("ago") === "1";
-let isFullScreen = getParam("full") === "1";
-
-// quality 파라미터 처리
-let qualityParam = getParam("quality");
-let qualityMap = { "0": "low", "1": "medium", "2": "high" };
-let qualityValue = qualityMap[qualityParam] || null;
-
-// 스크립트 선택
-var scriptUrl = isFullScreen ? 'https://flashgamehouse.github.io/ruffle.js' : 
-    (isUnpkg ? 'https://flashgamehouse.github.io/240607/ruffle.js' : 'https://kjsorolcl.github.io/mobile/ruffle.js');
-if (isAgoVer) {
-    scriptUrl = 'https://kjsorolcl.github.io/ruffle_nightly_2021_01_17_selfhosted/ruffle.js';
-}
-
-// 새로운 script 요소 생성
-var script = document.createElement('script');
-script.type = 'text/javascript';
-script.async = true;
-script.src = scriptUrl;
-
-script.onload = function() {
-    isLoadScript = true;
-    swfobject.embedSWF = function (url, cont, width, height) {
-        var ruffle = window.RufflePlayer.newest(),
-            player = Object.assign(document.getElementById(cont).appendChild(ruffle.createPlayer()), {
-                width: width,
-                height: height,
-                style: 'width: ' + width + 'px; height: ' + height + 'px',
-            });
-
-        window.RufflePlayer.config = {
-            autoplay: "on",
-            unmuteOverlay: "hidden",
-            preloader: false,
-            warnOnUnsupportedContent: false,
-            menu: false,
-            showContextMenu: false,
-            forceScale: isFullScreen,
-            forceAlign: isFullScreen,
-            fontSources: [
-                "https://kjsorolcl.github.io/Noto%20Sans.swf",
-                "https://kjsorolcl.github.io/%E1%84%83%E1%85%A9%E1%86%AE%E1%84%8B%E1%85%AE%E1%86%B7.swf",
-                "https://kjsorolcl.github.io/font/%E1%84%80%E1%85%AE%E1%86%AF%E1%84%85%E1%85%B5%E1%86%B7.swf"
-            ],
-            defaultFonts: {
-                "sans": [
-                    "굴림", "나눔", "Noto Sans", "돋움", "Arial", "Helvetica", "sans-serif"
-                ]
-            },
-        };
-
-        // quality 적용
-        if (qualityValue) {
-            window.RufflePlayer.config.quality = qualityValue;
-        }
-
-        player.load({ url: url }).then(() => { console.log('SWF Loaded'); });
-        player2 = player;
-        ruffle2 = ruffle;
-
-        if (isFullScreen) {
-            player2.enterFullscreen();
-        }
-    }
-}
-document.head.appendChild(script);
-
-// 초기 로딩 체크
-var pollCount = 0;
-var pollWindowHeight = function() {
-    if (window.innerHeight == 0 || !isLoadScript) {
-        pollCount += 1;
-        if (pollCount < 200) {
-            setTimeout(pollWindowHeight, 50);
-        }
-    } else {
-        mobileWidth = window.innerWidth;
-        mobileHeight = window.innerHeight;
-        if (getParam("width")) {
-            mobileWidth = parseInt(getParam("width"));
-        }
-        if (getParam("height")) {
-            mobileHeight = parseInt(getParam("height"));
-        }
-        console.log("url param (full):", getParam("full"));
-        swfobject.embedSWF(getParam("url"), 'ruffle', mobileWidth, mobileHeight);
-
-        // iOS 더블탭 확대 방지
-        var lastTouchEnd = 0;
-        document.addEventListener('touchend', function (event) {
-            var now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
+    
+            if (qualityValue) {
+                window.RufflePlayer.config.quality = qualityValue;
             }
-            lastTouchEnd = now;
-        }, false);
+    
+            player.load({ url: url }).then(() => { console.log('SWF Loaded'); });
+            player2 = player;
+            ruffle2 = ruffle;
+    
+            if (isFullScreen) player2.enterFullscreen();
+        }
     }
-}
-document.addEventListener("DOMContentLoaded", pollWindowHeight, false);
-</script>
+    document.head.appendChild(script);
+    
+    // 초기 로딩 체크
+    var pollCount = 0;
+    var pollWindowHeight = function() {
+        if (window.innerHeight == 0 || !isLoadScript) {
+            pollCount++;
+            if (pollCount < 200) setTimeout(pollWindowHeight, 50);
+        } else {
+            mobileWidth = window.innerWidth;
+            mobileHeight = window.innerHeight;
+            if (getParam("width")) mobileWidth = parseInt(getParam("width"));
+            if (getParam("height")) mobileHeight = parseInt(getParam("height"));
+            console.log("url param (full):", getParam("full"));
+            swfobject.embedSWF(getParam("url"), 'ruffle', mobileWidth, mobileHeight);
+    
+            var lastTouchEnd = 0;
+            document.addEventListener('touchend', function (event) {
+                var now = (new Date()).getTime();
+                if (now - lastTouchEnd <= 300) event.preventDefault();
+                lastTouchEnd = now;
+            }, false);
+        }
+    }
+    document.addEventListener("DOMContentLoaded", pollWindowHeight, false);
+    </script>
+    
