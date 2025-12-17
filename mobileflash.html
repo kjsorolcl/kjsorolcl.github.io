@@ -87,7 +87,8 @@
     let isUnpkg = getParam("unpkg") === "1";
     let isAgoVer = getParam("ago") === "1";
     let isFullScreen = getParam("full") === "1";
-    let isKoreanFont = getParam("koreanfont") === "1"; // ✅ 추가
+    let isKoreanFont = getParam("koreanfont") === "1";
+    let isBaseEnabled = getParam("base") === "1";
     
     // quality 파라미터 처리
     let qualityParam = getParam("quality");
@@ -142,6 +143,9 @@
     
             if (qualityValue) {
                 window.RufflePlayer.config.quality = qualityValue;
+            }
+            if (isBaseEnabled) {
+                window.RufflePlayer.config.base = "http://kjsorolcl.github.io";
             }
     
             player.load({ url: url }).then(() => { console.log('SWF Loaded'); });
