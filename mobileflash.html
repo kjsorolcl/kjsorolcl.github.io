@@ -96,10 +96,27 @@
     let qualityValue = qualityMap[qualityParam] || null;
     
     // 스크립트 선택
-    var scriptUrl = isFullScreen ? 'https://flashgamehouse.github.io/ruffle.js' : 
-        (isUnpkg ? 'https://flashgamehouse.github.io/240607/ruffle.js' : 'https://kjsorolcl.github.io/mobile/ruffle.js');
-    if (isAgoVer) {
+    var scriptUrl;
+    
+    // 🔥 newlib=1 이면 무조건 최신 unpkg ruffle 사용
+    if (isNewLib) {
+        scriptUrl = 'https://unpkg.com/@ruffle-rs/ruffle';
+    }
+    // 기존 과거 버전
+    else if (isAgoVer) {
         scriptUrl = 'https://kjsorolcl.github.io/ruffle_nightly_2021_01_17_selfhosted/ruffle.js';
+    }
+    // fullscreen 우선
+    else if (isFullScreen) {
+        scriptUrl = 'https://flashgamehouse.github.io/ruffle.js';
+    }
+    // unpkg 옵션
+    else if (isUnpkg) {
+        scriptUrl = 'https://flashgamehouse.github.io/240607/ruffle.js';
+    }
+    // 기본값
+    else {
+        scriptUrl = 'https://kjsorolcl.github.io/mobile/ruffle.js';
     }
     
     var script = document.createElement('script');
