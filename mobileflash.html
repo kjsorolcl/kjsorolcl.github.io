@@ -164,6 +164,8 @@
             }
             if (isBaseEnabled) {
                 window.RufflePlayer.config.base = "http://kjsorolcl.github.io";
+            } else if (getParam("base") === "2") {
+                window.RufflePlayer.config.base = "https://flashgamehouse.github.io";
             }
     
             player.load({ url: url }).then(() => { console.log('SWF Loaded'); });
