@@ -1,0 +1,27 @@
+{
+
+  "android": {
+
+    "latest_version_code": 5,
+
+    "minimum_required_version_code": 3,
+
+    "store_url": "https://play.google.com/store/apps/details?id=com.seoreleaselabs.rainbowprism",
+
+    "message": "A new version is available."
+
+  },
+
+  "ios": {
+
+    "latest_version_code": 5,
+
+    "minimum_required_version_code": 3,
+
+    "store_url": "https://apps.apple.com/app/rainbow-prism/id6769722422",
+
+    "message": "A new version is available."
+
+  }
+
+}
