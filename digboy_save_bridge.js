@@ -130,6 +130,20 @@
     }
   }
 
+  function upgradeAllowedAssetUrl(rawUrl) {
+    try {
+      const url = new URL(String(rawUrl || ""), window.location.href);
+      if (window.location.protocol === "https:" &&
+        url.protocol === "http:" &&
+        url.hostname === "kjsorolcl.github.io") {
+        url.protocol = "https:";
+        return url.href;
+      }
+    } catch (_) {
+    }
+    return rawUrl;
+  }
+
   function loadVarsValue(payload) {
     return String(payload || "")
       .replace(/\+/g, "%2B")
@@ -300,7 +314,11 @@
     const nativeFetch = window.fetch.bind(window);
     window.fetch = async function (resource, init) {
       const url = typeof resource === "string" ? resource : resource && resource.url;
-      if (!bridgeEnabled || !isProxyEndpoint(url)) return nativeFetch(resource, init);
+      if (!bridgeEnabled || !isProxyEndpoint(url)) {
+        const upgradedUrl = upgradeAllowedAssetUrl(url);
+        if (upgradedUrl !== url) return nativeFetch(upgradedUrl, init);
+        return nativeFetch(resource, init);
+      }
       const method = init && init.method || resource && resource.method || "POST";
       const body = init && init.body ? await bodyToText(init.body) :
         resource instanceof Request ? await resource.clone().text().catch(() => "") : "";
@@ -310,7 +328,9 @@
     const nativeOpen = XMLHttpRequest.prototype.open;
     const nativeSend = XMLHttpRequest.prototype.send;
     XMLHttpRequest.prototype.open = function (method, url) {
-      this.__digboyRequest = { method, url };
+      const upgradedUrl = upgradeAllowedAssetUrl(url);
+      this.__digboyRequest = { method, url: upgradedUrl };
+      arguments[1] = upgradedUrl;
       return nativeOpen.apply(this, arguments);
     };
     XMLHttpRequest.prototype.send = function (body) {
@@ -409,7 +429,8 @@
       openUrlMode: "deny",
       upgradeToHttps: false,
       urlRewriteRules: [
-        [/^https?:\/\/(?:alpha-)?packgoon\.hangame\.com\/gamepack\/game\/save\.nhn(\?.*)?$/i, `${DIGBOY.proxyPath}$1`]
+        [/^https?:\/\/(?:alpha-)?packgoon\.hangame\.com\/gamepack\/game\/save\.nhn(\?.*)?$/i, `${DIGBOY.proxyPath}$1`],
+        [/^http:\/\/kjsorolcl\.github\.io\/(.+)$/i, "https://kjsorolcl.github.io/$1"]
       ]
     };
   }
