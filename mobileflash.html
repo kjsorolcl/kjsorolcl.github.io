@@ -102,11 +102,14 @@
       const params = getParams();
       let loadUrl = url;
       let digboyPrepare = null;
-
+      const traceMode = params.trace === "1";
+      
       if (window.FlashGameMobileDigboySave) {
         digboyPrepare = await window.FlashGameMobileDigboySave.prepare(url, {
           params,
-          patchedSwfUrl: "/swf/digboy/digboy_save_v1.swf"
+          patchedSwfUrl: traceMode
+            ? "/swf/digboy/digboy_save_v1_boss_trace.swf"
+            : "/swf/digboy/digboy_save_v1.swf"
         });
         if (digboyPrepare.enabled) loadUrl = digboyPrepare.url;
       }
