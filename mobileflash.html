@@ -154,6 +154,17 @@
         style: "width: " + width + "px; height: " + height + "px"
       });
 
+      if (traceMode) {
+        try {
+          player.traceObserver = function (message) {
+            console.log(String(message));
+          };
+          console.log("[DigboyTrace] traceObserver installed");
+        } catch (error) {
+          console.warn("[DigboyTrace] traceObserver install failed", error);
+        }
+      }
+
       player.load({ url: loadUrl }).then(() => {
         console.log("SWF Loaded");
       });
