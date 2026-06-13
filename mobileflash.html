@@ -130,7 +130,7 @@
         digboyPrepare = await window.FlashGameMobileDigboySave.prepare(url, {
           params,
           patchedSwfUrl: traceMode
-            ? "/swf/digboy/digboy_save_v1_boss_trace.swf"
+            ? "/swf/digboy/boss_interval_fix_test.swf"
             : "/swf/digboy/digboy_save_v1.swf"
         });
         if (digboyPrepare.enabled) loadUrl = digboyPrepare.url;
