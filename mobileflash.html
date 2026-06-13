@@ -30,6 +30,28 @@
   var ruffle2;
   var isLoadScript = false;
 
+  function installTraceObserver(player) {
+    const observer = function (message) {
+      console.log(String(message));
+    };
+  
+    try {
+      player.traceObserver = observer;
+      console.log("[DigboyTrace] legacy traceObserver installed");
+    } catch (error) {
+      console.warn("[DigboyTrace] legacy traceObserver failed", error);
+    }
+  
+    try {
+      if (typeof player.ruffle === "function") {
+        player.ruffle().traceObserver = observer;
+        console.log("[DigboyTrace] v1 traceObserver installed");
+      }
+    } catch (error) {
+      console.warn("[DigboyTrace] v1 traceObserver failed", error);
+    }
+  }
+
   function getParams() {
     const result = {};
     let queryString = window.location.search;
@@ -160,12 +182,14 @@
             console.log(String(message));
           };
           console.log("[DigboyTrace] traceObserver installed");
+          installTraceObserver(player);
         } catch (error) {
           console.warn("[DigboyTrace] traceObserver install failed", error);
         }
       }
 
       player.load({ url: loadUrl }).then(() => {
+        if (traceMode) installTraceObserver(player);
         console.log("SWF Loaded");
       });
       player2 = player;
