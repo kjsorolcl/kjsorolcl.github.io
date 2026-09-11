@@ -125,6 +125,7 @@
       let loadUrl = url;
       let digboyPrepare = null;
       const traceMode = params.trace === "1";
+      const allowScriptAccessRequested = params.aca === "1";
       
       if (window.FlashGameMobileDigboySave) {
         digboyPrepare = await window.FlashGameMobileDigboySave.prepare(url, {
@@ -149,6 +150,10 @@
 
       if (digboyPrepare && digboyPrepare.enabled && window.FlashGameMobileDigboySave) {
         Object.assign(window.RufflePlayer.config, window.FlashGameMobileDigboySave.ruffleConfigPatch());
+      }
+
+      if (allowScriptAccessRequested) {
+        window.RufflePlayer.config.allowScriptAccess = true;
       }
 
       if (isKoreanFont) {
@@ -188,7 +193,10 @@
         }
       }
 
-      player.load({ url: loadUrl }).then(() => {
+      const loadOptions = { url: loadUrl };
+      if (allowScriptAccessRequested) loadOptions.allowScriptAccess = true;
+
+      player.load(loadOptions).then(() => {
         if (traceMode) installTraceObserver(player);
         console.log("SWF Loaded");
       });
