@@ -95,6 +95,7 @@
   let isFullScreen = getParam("full") === "1";
   let isKoreanFont = getParam("koreanfont") === "1";
   let isBaseEnabled = getParam("base") === "1";
+  let basePath = getParam("path");
   let isNewLib = getParam("newlib") === "1";
   let qualityParam = getParam("quality");
   let qualityMap = { "0": "low", "1": "medium", "2": "high" };
@@ -107,7 +108,7 @@
     scriptUrl = "https://kjsorolcl.github.io/ruffle_nightly_2021_01_17_selfhosted/ruffle.js";
   } else if (isFullScreen) {
     scriptUrl = "https://flashgamehouse.github.io/ruffle.js";
-  } else if (isUnpkg) {
+  } else if (isUnpkg || basePath) {
     scriptUrl = "https://flashgamehouse.github.io/240607/ruffle.js";
   } else {
     scriptUrl = "https://kjsorolcl.github.io/mobile/ruffle.js";
@@ -168,7 +169,9 @@
       }
 
       if (qualityValue) window.RufflePlayer.config.quality = qualityValue;
-      if (isBaseEnabled) {
+      if (basePath) {
+        window.RufflePlayer.config.base = basePath;
+      } else if (isBaseEnabled) {
         window.RufflePlayer.config.base = "http://kjsorolcl.github.io";
       } else if (getParam("base") === "2") {
         window.RufflePlayer.config.base = "https://flashgamehouse.github.io";
